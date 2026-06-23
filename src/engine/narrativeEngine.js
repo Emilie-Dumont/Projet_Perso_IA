@@ -6,7 +6,7 @@
  * @param {Object} nodes - dictionnaire { id: noeud }
  * @param {string} startId - id du nœud de départ
  * @param {string} ageProfile - profil d'âge initial ("6-12" ou "13-18")
- * @returns {Object} API du moteur (getCurrentNode, choose, restart, getHistory, setAgeProfile, getAgeProfile)
+ * @returns {Object} API du moteur (getCurrentNode, choose, restart, restoreHistory, getHistory, setAgeProfile, getAgeProfile)
  */
 export function createNarrativeEngine(nodes, startId = 'start', ageProfile = '6-12') {
   let history = [startId];
@@ -65,6 +65,22 @@ export function createNarrativeEngine(nodes, startId = 'start', ageProfile = '6-
   }
 
   /**
+   * Remplace l'historique courant par un historique sauvegardé (ex: localStorage),
+   * pour reprendre l'histoire exactement où le joueur l'avait laissée.
+   * Chaque id doit exister dans `nodes`, sinon on repart proprement au nœud de départ.
+   * @param {string[]} savedHistory - liste d'ids de nœuds visités, dans l'ordre
+   */
+  function restoreHistory(savedHistory) {
+    const isValid =
+      Array.isArray(savedHistory) &&
+      savedHistory.length > 0 &&
+      savedHistory.every((id) => Boolean(nodes[id]));
+
+    history = isValid ? [...savedHistory] : [startId];
+    return getCurrentNode();
+  }
+
+  /**
    * Retourne la liste des ids de nœuds visités (ordre chronologique).
    */
   function getHistory() {
@@ -82,6 +98,7 @@ export function createNarrativeEngine(nodes, startId = 'start', ageProfile = '6-
     getCurrentNode,
     choose,
     restart,
+    restoreHistory,
     getHistory,
     isEnding,
     setAgeProfile,
