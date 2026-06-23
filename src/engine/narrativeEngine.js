@@ -11,11 +11,12 @@ const DEFAULT_PLAYER_NAME = 'Aventurier';
  * @param {Object} nodes - dictionnaire { id: noeud } de l'histoire sélectionnée
  * @param {string} startId - id du nœud de départ
  * @returns {Object} API du moteur (getCurrentNode, choose, restart, restoreHistory, getHistory,
- *   isEnding, setPlayerName, getPlayerName)
+ *   getChosenLabels, isEnding, setPlayerName, getPlayerName)
  */
 export function createNarrativeEngine(nodes, startId = 'start') {
   let history = [startId];
   let playerName = DEFAULT_PLAYER_NAME;
+  let chosenLabels = [];
 
   function getCurrentNodeId() {
     return history[history.length - 1];
@@ -58,6 +59,14 @@ export function createNarrativeEngine(nodes, startId = 'start') {
     if (!nodes[nextId]) {
       throw new Error(`Impossible d'aller vers le nœud "${nextId}" : il n'existe pas.`);
     }
+
+    // On retrouve le libellé du choix sélectionné avant de changer de nœud,
+    // pour pouvoir reconstituer un résumé de l'aventure sur le nœud de fin.
+    const chosenOption = getCurrentNode().choices.find((choice) => choice.next === nextId);
+    if (chosenOption) {
+      chosenLabels.push(chosenOption.label);
+    }
+
     history.push(nextId);
     return getCurrentNode();
   }
@@ -67,6 +76,7 @@ export function createNarrativeEngine(nodes, startId = 'start') {
    */
   function restart() {
     history = [startId];
+    chosenLabels = [];
     return getCurrentNode();
   }
 
@@ -83,6 +93,21 @@ export function createNarrativeEngine(nodes, startId = 'start') {
       savedHistory.every((id) => Boolean(nodes[id]));
 
     history = isValid ? [...savedHistory] : [startId];
+
+    // Reconstruit les libellés choisis en parcourant l'historique restauré deux nœuds
+    // à la fois, pour pouvoir afficher un résumé de l'aventure même après reprise.
+    chosenLabels = [];
+    if (isValid) {
+      for (let i = 0; i < history.length - 1; i += 1) {
+        const fromNode = nodes[history[i]];
+        const toId = history[i + 1];
+        const matchingChoice = fromNode.choices.find((choice) => choice.next === toId);
+        if (matchingChoice) {
+          chosenLabels.push(matchingChoice.label);
+        }
+      }
+    }
+
     return getCurrentNode();
   }
 
@@ -91,6 +116,13 @@ export function createNarrativeEngine(nodes, startId = 'start') {
    */
   function getHistory() {
     return [...history];
+  }
+
+  /**
+   * Retourne la liste des libellés des choix sélectionnés par le joueur, dans l'ordre.
+   */
+  function getChosenLabels() {
+    return [...chosenLabels];
   }
 
   /**
@@ -106,6 +138,7 @@ export function createNarrativeEngine(nodes, startId = 'start') {
     restart,
     restoreHistory,
     getHistory,
+    getChosenLabels,
     isEnding,
     setPlayerName,
     getPlayerName,

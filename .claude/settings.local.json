@@ -20,7 +20,8 @@
       "Bash(curl -s http://localhost:5173/src/ui/render.js)",
       "Bash(curl -s \"http://localhost:5173/src/assets/fantasy.svg?import\")",
       "Bash(taskkill //PID 39488 //F)",
-      "Bash(taskkill //PID 4233792 //F)"
+      "Bash(taskkill //PID 4233792 //F)",
+      "Bash(start \"\" \"http://localhost:5173/\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\emili\\Desktop\\Projet_Perso_IA\\.claude",

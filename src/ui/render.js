@@ -27,8 +27,10 @@ const FALLBACK_STYLE = 'adventure';
  * @param {Function} options.onRestart - callback() appelé au clic sur "Recommencer"
  * @param {string} options.playerName - prénom du joueur, pour remplacer {prenom}
  * @param {string} [options.style] - style narratif courant ("adventure" | "funny" | "fantasy")
+ * @param {string[]} [options.chosenLabels] - libellés des choix faits par le joueur, dans
+ *   l'ordre ; affichés en résumé uniquement sur les nœuds de fin.
  */
-export function renderNode(container, node, { onChoose, onRestart, playerName, style }) {
+export function renderNode(container, node, { onChoose, onRestart, playerName, style, chosenLabels }) {
   // On change de nœud (y compris via "Recommencer") : on coupe toute lecture vocale en cours.
   stopSpeaking();
 
@@ -84,6 +86,28 @@ export function renderNode(container, node, { onChoose, onRestart, playerName, s
     endEl.className = 'text-sm text-slate-500 italic';
     endEl.textContent = "Fin de l'histoire.";
     choicesEl.appendChild(endEl);
+
+    // Résumé de l'aventure : uniquement si on a au moins un choix fait par le joueur.
+    if (Array.isArray(chosenLabels) && chosenLabels.length > 0) {
+      const summaryEl = document.createElement('div');
+      summaryEl.className = 'mt-4 p-4 rounded-xl bg-indigo-50 border border-indigo-100';
+
+      const summaryTitleEl = document.createElement('p');
+      summaryTitleEl.className = 'text-sm font-semibold text-indigo-800 mb-2';
+      summaryTitleEl.textContent = '📜 Ton aventure en résumé';
+      summaryEl.appendChild(summaryTitleEl);
+
+      const summaryListEl = document.createElement('ol');
+      summaryListEl.className = 'list-decimal list-inside space-y-1 text-sm text-slate-700';
+      chosenLabels.forEach((label) => {
+        const itemEl = document.createElement('li');
+        itemEl.textContent = label;
+        summaryListEl.appendChild(itemEl);
+      });
+      summaryEl.appendChild(summaryListEl);
+
+      choicesEl.appendChild(summaryEl);
+    }
   }
 
   wrapper.appendChild(choicesEl);
