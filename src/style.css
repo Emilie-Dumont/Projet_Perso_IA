@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fade-in simple à l'apparition d'un écran (sélection d'âge, nœud narratif, etc.).
+   La classe "fade-in" pose l'état initial invisible/légèrement décalé, puis
+   "fade-in-visible" (ajoutée juste après le montage dans le DOM via JS) déclenche
+   la transition vers l'état final. */
+.fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.fade-in.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

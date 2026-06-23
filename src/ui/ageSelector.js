@@ -1,6 +1,8 @@
 // Écran de sélection du profil d'âge, affiché avant le début de l'histoire.
 // Permet d'adapter ensuite le vocabulaire des nœuds narratifs.
 
+import logo from '../assets/logo.svg';
+
 /**
  * Affiche l'écran de choix du profil d'âge dans le conteneur donné.
  * @param {HTMLElement} container - élément DOM cible (ex: #app)
@@ -12,7 +14,14 @@ export function renderAgeSelector(container, callbacks) {
   container.innerHTML = '';
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'max-w-2xl mx-auto mt-12 p-6 bg-white rounded-2xl shadow-md text-center';
+  // "fade-in" : voir style.css pour la transition d'opacité au montage
+  wrapper.className = 'max-w-2xl mx-auto mt-12 p-6 bg-white rounded-2xl shadow-md text-center fade-in';
+
+  const logoEl = document.createElement('img');
+  logoEl.src = logo;
+  logoEl.alt = 'Logo NarrativePath';
+  logoEl.className = 'mx-auto mb-6 h-20';
+  wrapper.appendChild(logoEl);
 
   const title = document.createElement('h1');
   title.className = 'text-2xl font-bold text-slate-800 mb-2';
@@ -43,4 +52,9 @@ export function renderAgeSelector(container, callbacks) {
 
   wrapper.appendChild(choicesEl);
   container.appendChild(wrapper);
+
+  // Déclenche la transition d'opacité une fois le wrapper monté dans le DOM.
+  requestAnimationFrame(() => {
+    wrapper.classList.add('fade-in-visible');
+  });
 }

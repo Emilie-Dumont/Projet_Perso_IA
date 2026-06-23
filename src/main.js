@@ -65,6 +65,7 @@ function displayStory() {
 
   renderNode(appContainer, currentNode, {
     playerName: engine.getPlayerName(),
+    style: currentStyle,
     onChoose: (nextId) => {
       engine.choose(nextId);
       // Une fin atteinte ne doit pas rester "reprenable" : on efface la sauvegarde

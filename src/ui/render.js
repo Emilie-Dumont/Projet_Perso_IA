@@ -4,6 +4,18 @@
 // (voir src/data/stories.js) : il ne reste plus qu'à remplacer {prenom} via `buildText`.
 
 import { buildText } from '../engine/buildText.js';
+import adventureIllustration from '../assets/adventure.svg';
+import funnyIllustration from '../assets/funny.svg';
+import fantasyIllustration from '../assets/fantasy.svg';
+
+// Illustration affichée en haut de l'écran d'histoire selon le style narratif choisi.
+// Repli sur "adventure" si le style est absent ou inconnu.
+const STYLE_ILLUSTRATIONS = {
+  adventure: adventureIllustration,
+  funny: funnyIllustration,
+  fantasy: fantasyIllustration,
+};
+const FALLBACK_STYLE = 'adventure';
 
 /**
  * Affiche le nœud narratif courant dans le conteneur donné.
@@ -13,13 +25,24 @@ import { buildText } from '../engine/buildText.js';
  * @param {Function} options.onChoose - callback(nextId) appelé au clic sur un choix
  * @param {Function} options.onRestart - callback() appelé au clic sur "Recommencer"
  * @param {string} options.playerName - prénom du joueur, pour remplacer {prenom}
+ * @param {string} [options.style] - style narratif courant ("adventure" | "funny" | "fantasy")
  */
-export function renderNode(container, node, { onChoose, onRestart, playerName }) {
+export function renderNode(container, node, { onChoose, onRestart, playerName, style }) {
   // Reset du conteneur avant chaque rendu
   container.innerHTML = '';
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'max-w-2xl mx-auto mt-12 p-6 bg-white rounded-2xl shadow-md';
+  // Le fade-in est géré via la classe "fade-in" définie dans style.css :
+  // on démarre invisible, puis on ajoute la classe juste après le montage dans le DOM.
+  wrapper.className = 'max-w-2xl mx-auto mt-12 p-6 bg-white rounded-2xl shadow-md fade-in';
+
+  // Illustration de style narratif, au-dessus du texte du nœud
+  const illustrationSrc = STYLE_ILLUSTRATIONS[style] || STYLE_ILLUSTRATIONS[FALLBACK_STYLE];
+  const illustrationEl = document.createElement('img');
+  illustrationEl.src = illustrationSrc;
+  illustrationEl.alt = `Illustration d'ambiance pour le style ${style || FALLBACK_STYLE}`;
+  illustrationEl.className = 'w-full rounded-2xl mb-6 object-cover';
+  wrapper.appendChild(illustrationEl);
 
   // Texte de la scène : le {prenom} du nœud est remplacé par le prénom du joueur
   const finalText = buildText(node, { playerName });
@@ -62,4 +85,10 @@ export function renderNode(container, node, { onChoose, onRestart, playerName })
   wrapper.appendChild(restartBtn);
 
   container.appendChild(wrapper);
+
+  // Déclenche la transition d'opacité une fois le wrapper monté dans le DOM
+  // (le navigateur a besoin d'un repaint entre l'état initial et l'état final).
+  requestAnimationFrame(() => {
+    wrapper.classList.add('fade-in-visible');
+  });
 }

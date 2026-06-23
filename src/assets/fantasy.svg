@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" role="img" aria-label="Illustration style fantastique : ciel étoilé et lueurs magiques">
+  <defs>
+    <linearGradient id="fan-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#312e81" />
+      <stop offset="100%" stop-color="#6d28d9" />
+    </linearGradient>
+    <radialGradient id="fan-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0abfc" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#f0abfc" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Fond ciel nocturne -->
+  <rect x="0" y="0" width="800" height="300" rx="24" fill="url(#fan-sky)" />
+
+  <!-- Lueur magique centrale -->
+  <circle cx="400" cy="140" r="140" fill="url(#fan-glow)" />
+
+  <!-- Lune -->
+  <circle cx="660" cy="70" r="38" fill="#fef9c3" opacity="0.95" />
+  <circle cx="675" cy="58" r="38" fill="#312e81" opacity="0.55" />
+
+  <!-- Étoiles -->
+  <g fill="#fef9c3">
+    <path d="M120 60 l4 9 9 1 -7 6 2 9 -8 -5 -8 5 2 -9 -7 -6 9 -1 z" />
+    <path d="M200 100 l3 7 7 1 -5 5 1 7 -6 -4 -6 4 1 -7 -5 -5 7 -1 z" />
+    <path d="M520 50 l3 7 7 1 -5 5 1 7 -6 -4 -6 4 1 -7 -5 -5 7 -1 z" />
+    <path d="M740 160 l4 9 9 1 -7 6 2 9 -8 -5 -8 5 2 -9 -7 -6 9 -1 z" />
+    <circle cx="60" cy="140" r="2.5" />
+    <circle cx="320" cy="40" r="2" />
+    <circle cx="430" cy="220" r="2.5" />
+    <circle cx="600" cy="210" r="2" />
+    <circle cx="90" cy="220" r="2" />
+  </g>
+
+  <!-- Montagnes/silhouettes oniriques -->
+  <path d="M0 230 L90 150 L160 210 L240 140 L330 230 Z" fill="#4c1d95" opacity="0.8" />
+  <path d="M380 230 L470 160 L540 215 L640 130 L800 230 Z" fill="#4c1d95" opacity="0.8" />
+
+  <!-- Sol -->
+  <path d="M0 235 Q 200 215 400 240 T 800 230 V300 H0 Z" fill="#312e81" />
+
+  <!-- Silhouette de château onirique -->
+  <g transform="translate(360,150)" fill="#1e1b4b" opacity="0.9">
+    <rect x="0" y="40" width="80" height="50" />
+    <rect x="-10" y="20" width="20" height="70" />
+    <rect x="70" y="20" width="20" height="70" />
+    <polygon points="-10,20 0,0 10,20" />
+    <polygon points="70,20 80,0 90,20" />
+    <rect x="30" y="55" width="20" height="35" />
+  </g>
+
+  <!-- Particules magiques -->
+  <g fill="#f0abfc">
+    <circle cx="300" cy="190" r="3" opacity="0.8" />
+    <circle cx="470" cy="200" r="2.5" opacity="0.8" />
+    <circle cx="430" cy="170" r="2" opacity="0.8" />
+    <circle cx="340" cy="160" r="2" opacity="0.8" />
+  </g>
+</svg>
