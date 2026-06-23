@@ -1,32 +1,71 @@
-Cahier des Charges — NarrativePath (version définitive)
-1. Problématique
-Contexte d'usage concret : Un parent donne une tablette à son enfant de 8 ans pour une histoire interactive. Avec AI Dungeon, il surveille. Avec un livre "Héros", l'enfant a lu toutes les fins en deux semaines. NarrativePath est l'outil qui résout les deux problèmes simultanément.
-Problème formulé : Comment permettre à un enfant (6–12 ans, contexte familial) ou un adolescent (13–18 ans, contexte scolaire) de bénéficier de la narration générative sans dérive de contenu possible, et sans épuisement du contenu disponible ?
-Ce que NarrativePath n'est pas : Pas un jeu vidéo, pas un générateur libre, pas un outil universel. C'est un outil de médiation narrative pour deux contextes précis.
-Vision long terme : Extension 0–5 ans et adultes si temps disponible — architecturalement prévue, hors périmètre jour 1.
-2. Analyse Concurrentielle
-ConcurrentLimite préciseAvantage NarrativePathLivres "Héros"Contenu fixe, épuisable, non personnalisableGénération infinie, adaptée en temps réel, impossible à épuiserChoiceScriptBarrière technique : syntaxe à apprendreZéro friction : accès immédiat sans formationAI DungeonFiltrage réactif ayant échoué publiquementFiltrage a priori : contrainte de génération, pas modération
-Preuve concrète de sécurité : Le system prompt encapsule chaque entrée utilisateur dans un contexte contrôlé avant qu'elle atteigne le modèle. L'enfant ne peut pas formuler une requête hors-charte — sa demande est structurellement encadrée, pas filtrée après coup. C'est la différence entre une pièce dont on ferme la porte et une pièce dont on surveille l'entrée.
-3. Spécifications Techniques
+# Cahier des Charges — NarrativePath (version finale)
 
-Build : Vite.js — statique, sans serveur.
-Sécurité : System prompts haute priorité par profil d'âge, encapsulation des entrées utilisateur.
-Confidentialité : State management local — RGPD natif, zéro donnée transmise.
-Évolutivité : Mock → API réelle sans refactorisation. Nouveau segment = nouveau profil de prompt.
+## 1. Problématique
 
-4. Décomposition MoSCoW
+Dans un contexte réel, un parent souhaite proposer une histoire interactive à son enfant via une tablette.
 
-Must have : Setup Vite.js, moteur narratif, Guardrails (profils 6–12 et 13–18), PROMPTS.md, LOG_GESTION.md.
-Should have : Personnalisation prénom, responsive (Tailwind), bouton "Rejouer".
-Could have : Web Speech API, transitions CSS, profil adulte.
-Won't have (jour 1) : BDD, login, profil 0–5 ans — prévus, non abandonnés.
+Aujourd’hui, deux solutions existent :
+- Les livres interactifs : contenu limité et répétitif
+- Les outils IA (type AI Dungeon) : contenus non contrôlés
 
-5. Organisation et Outils
-Outil de gestion : Kanban textuel dans LOG_GESTION.md, méthode MoSCoW, mis à jour à chaque étape — visible et traçable par l'enseignant.
-Planning jour 1 :
+**Problème :**
+Comment proposer une narration interactive infinie, personnalisée et sécurisée pour des enfants (6–12 ans) et des adolescents (13–18 ans) ?
 
-09h–10h : Init + structure des documents de traçabilité.
-10h–12h : Mock Service + Guardrails (profils 6–12 et 13–18).
-12h–14h : State Management + logique de nœuds narratifs.
-14h–16h : UI responsive, tests par profil d'âge.
-16h–18h : Documentation finale, audit de conformité. Profil adulte si temps disponible.
+---
+
+## 2. Objectif du projet
+
+Créer une application web de fiction interactive :
+
+- accessible immédiatement (sans compte)
+- sécurisée par design
+- personnalisée (prénom, style, âge)
+- basée sur des choix narratifs
+
+---
+
+## 3. Fonctionnalités principales
+
+### 🔹 Moteur narratif
+- système de nœuds
+- chaque nœud contient :
+  - un texte
+  - 2 à 3 choix
+- navigation entre les scènes
+
+### 🔹 Personnalisation
+- prénom de l’utilisateur intégré dans l’histoire
+- choix du style narratif :
+  - aventure
+  - fantastique
+  - humour
+- adaptation du contenu selon l’âge :
+  - 6–12 ans
+  - 13–18 ans
+
+### 🔹 Sécurité
+- contenu adapté à la tranche d’âge
+- simulation de prompts IA sécurisés
+- filtrage par design (et non après génération)
+
+### 🔹 Rejouabilité
+- bouton "Recommencer"
+- possibilité de tester plusieurs parcours
+
+---
+
+## 4. Architecture technique
+
+- Vite.js (application frontend)
+- JavaScript Vanilla
+- Tailwind CSS (UI)
+- JSON mock pour les données
+- localStorage pour sauvegarde
+- aucune API externe
+- aucune base de données
+
+---
+
+## 5. Organisation du projet
+
+``
