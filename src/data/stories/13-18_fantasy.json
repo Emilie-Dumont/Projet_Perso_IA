@@ -1,0 +1,100 @@
+{
+  "start": {
+    "id": "start",
+    "text": "{prenom}, dans la cité suspendue d'Asheria, le Conseil des Voiles t'a convoqué en urgence : la Source qui alimente la ville en magie s'éteint, et deux factions s'accusent mutuellement de l'avoir sabotée. On te confie une enquête discrète avant que le conflit n'éclate ouvertement. Deux pistes s'offrent à toi : interroger les Tisseurs de lumière, ou fouiller les archives interdites de la bibliothèque.",
+    "choices": [
+      { "label": "Interroger les Tisseurs de lumière", "next": "weavers" },
+      { "label": "Fouiller les archives interdites", "next": "archives" }
+    ]
+  },
+
+  "weavers": {
+    "id": "weavers",
+    "text": "Les Tisseurs nient toute implication, mais l'un d'eux, plus jeune, te glisse discrètement qu'il a vu quelqu'un près de la Source la nuit du sabotage — quelqu'un qui portait l'insigne du Conseil lui-même.",
+    "choices": [
+      { "label": "Le croire et enquêter sur le Conseil", "next": "council_suspicion" },
+      { "label": "Douter de son témoignage, trop commode", "next": "doubt_weaver" }
+    ]
+  },
+
+  "archives": {
+    "id": "archives",
+    "text": "Dans les archives interdites, tu découvres un parchemin ancien : la Source ne s'éteint pas à cause d'un sabotage, mais parce qu'elle arrive naturellement en fin de cycle, comme cela s'est déjà produit il y a trois siècles.",
+    "choices": [
+      { "label": "Révéler la vérité publiquement, malgré les tensions", "next": "reveal_truth" },
+      { "label": "Garder le secret et chercher une solution discrète", "next": "keep_secret" }
+    ]
+  },
+
+  "council_suspicion": {
+    "id": "council_suspicion",
+    "text": "Ton enquête mène à une conseillère respectée, Aldéris, qui avoue avoir voulu accélérer artificiellement le renouvellement de la Source pour 'sauver du temps' — sans mesurer le risque réel que cela représentait pour toute la cité.",
+    "choices": [
+      { "label": "La dénoncer publiquement devant le Conseil", "next": "ending_public_justice" },
+      { "label": "Lui donner une chance de réparer discrètement son erreur", "next": "ending_quiet_redemption" }
+    ]
+  },
+
+  "doubt_weaver": {
+    "id": "doubt_weaver",
+    "text": "Ton scepticisme te pousse à creuser plus loin : le jeune Tisseur avait en réalité menti pour détourner les soupçons de son propre clan, qui pratique en secret une magie interdite près de la Source.",
+    "choices": [
+      { "label": "Exposer le clan devant le Conseil", "next": "ending_clan_exposed" },
+      { "label": "Négocier en secret l'arrêt de leurs pratiques", "next": "ending_secret_deal" }
+    ]
+  },
+
+  "reveal_truth": {
+    "id": "reveal_truth",
+    "text": "La révélation publique calme les accusations mutuelles, mais provoque une vague de panique : si la magie décline naturellement, certains craignent déjà la fin d'Asheria telle qu'ils la connaissent.",
+    "choices": [
+      { "label": "Rassurer la population en personne", "next": "ending_honest_leader" },
+      { "label": "Te retirer plutôt pour chercher discrètement une solution concrète", "next": "keep_secret" }
+    ]
+  },
+
+  "keep_secret": {
+    "id": "keep_secret",
+    "text": "Tu choisis de chercher discrètement un moyen de prolonger le cycle de la Source, en travaillant seul(e) avec quelques alliés de confiance, loin des regards et des tensions politiques.",
+    "choices": [
+      { "label": "Mener ce travail discret jusqu'au bout", "next": "ending_silent_guardian" },
+      { "label": "Changer d'avis et informer le Conseil de la vérité", "next": "reveal_truth" }
+    ]
+  },
+
+  "ending_public_justice": {
+    "id": "ending_public_justice",
+    "text": "{prenom}, la vérité éclate devant tout le Conseil. Aldéris est démise de ses fonctions, la cité retrouve sa confiance envers les institutions, mais tu te demandes longtemps si la sanction était à la hauteur d'une erreur commise sans mauvaise intention.",
+    "choices": []
+  },
+
+  "ending_quiet_redemption": {
+    "id": "ending_quiet_redemption",
+    "text": "{prenom}, Aldéris répare discrètement la Source avec ton aide, sans que la cité n'apprenne jamais la vérité complète. Tu portes seul(e) le poids de ce secret, convaincu(e) d'avoir fait le choix le plus juste — sans certitude absolue.",
+    "choices": []
+  },
+
+  "ending_clan_exposed": {
+    "id": "ending_clan_exposed",
+    "text": "{prenom}, le clan est démantelé publiquement. La cité est rassurée, mais le jeune Tisseur qui t'avait menti perd tout, banni de son propre clan pour avoir indirectement causé cette exposition.",
+    "choices": []
+  },
+
+  "ending_secret_deal": {
+    "id": "ending_secret_deal",
+    "text": "{prenom}, le clan accepte d'arrêter ses pratiques interdites en échange de ton silence. La paix revient à Asheria, mais tu sais que tu as choisi la stabilité de la cité plutôt que la vérité totale — un compromis qui te pèse encore.",
+    "choices": []
+  },
+
+  "ending_honest_leader": {
+    "id": "ending_honest_leader",
+    "text": "{prenom}, ton discours apaise la population : la fin d'un cycle n'est pas une fin du monde, mais le début d'un autre. Asheria entame sa transition avec confiance, et toi, tu deviens une voix respectée du Conseil.",
+    "choices": []
+  },
+
+  "ending_silent_guardian": {
+    "id": "ending_silent_guardian",
+    "text": "{prenom}, grâce à ton travail discret, la Source retrouve une stabilité fragile mais réelle. Personne ne saura jamais ce que tu as fait pour la cité, mais toi, tu sais — et cela te suffit.",
+    "choices": []
+  }
+}

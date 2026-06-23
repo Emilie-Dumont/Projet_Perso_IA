@@ -1,0 +1,59 @@
+# Méthode MoSCoW — NarrativePath
+
+## M — MUST HAVE (Obligatoire)
+
+- Initialisation Vite.js fonctionnelle
+- Moteur narratif (nœuds + choix)
+- Données JSON mock
+- Segmentation d’âge (6–12 / 13–18)
+- Structure projet (data / engine / ui)
+- Bouton "Recommencer"
+- Fichier PROMPTS.md (sécurité IA)
+- Gestion du projet (utilisation IA + trace)
+
+---
+
+## S — SHOULD HAVE (Important)
+
+### Personnalisation de l’expérience
+- Intégration du prénom de l’utilisateur dans l’histoire
+- Choix du style narratif (aventure, humour, fantastique)
+- Adaptation du ton du récit en fonction du style
+
+### Interface
+- UI responsive (Tailwind CSS)
+- Interface claire et lisible
+
+### Expérience utilisateur
+- Navigation fluide
+- Rejouabilité simple
+
+---
+
+## C — COULD HAVE (Bonus)
+
+- Synthèse vocale
+- Effets visuels (fade-in)
+- Résumé de l’aventure
+- Mode adulte (optionnel)
+
+---
+
+## W — WON’T HAVE (Hors périmètre)
+
+- Base de données
+- Authentification utilisateur
+- API IA réelle
+- Mode 0–5 ans
+
+---
+
+## Conclusion
+
+Le projet se concentre sur un MVP fonctionnel :
+
+- sécurisé ✅
+- personnalisable ✅
+- exploratoire ✅
+
+La personnalisation (prénom + style + âge) renforce l'immersion et simule un comportement d’IA générative.

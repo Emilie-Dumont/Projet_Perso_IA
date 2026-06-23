@@ -1,5 +1,5 @@
 import './style.css';
-import nodesData from './data/nodes.mock.json';
+import { selectStory } from './data/stories.js';
 import { createNarrativeEngine } from './engine/narrativeEngine.js';
 import { renderNode } from './ui/render.js';
 import { renderAgeSelector } from './ui/ageSelector.js';
@@ -10,15 +10,24 @@ const appContainer = document.getElementById('app');
 
 const PROGRESS_STORAGE_KEY = 'narrativepath:progress';
 
-// Moteur narratif : créé une seule fois, le profil d'âge par défaut sera mis à jour si besoin.
-const engine = createNarrativeEngine(nodesData, 'start');
+// L'engine ne peut être créé qu'une fois l'âge ET le style connus, puisque ces deux
+// informations déterminent quel graphe d'histoire utiliser (voir selectStory).
+// Il est donc stocké ici et (re)créé à chaque soumission du formulaire de profil.
+let engine = null;
+let currentAgeProfile = null;
+let currentStyle = null;
 
 /**
- * Sauvegarde la progression courante (historique des nœuds visités) en localStorage,
- * pour permettre de reprendre l'histoire après un rechargement de la page.
+ * Sauvegarde la progression courante (combinaison âge/style + historique des nœuds
+ * visités) en localStorage, pour permettre de reprendre une histoire interrompue.
  */
 function saveProgress() {
-  localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(engine.getHistory()));
+  const progress = {
+    ageProfile: currentAgeProfile,
+    style: currentStyle,
+    history: engine.getHistory(),
+  };
+  localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(progress));
 }
 
 /**
@@ -30,7 +39,7 @@ function clearProgress() {
 
 /**
  * Lit la progression sauvegardée en localStorage, si elle existe et qu'elle est lisible.
- * @returns {string[]|null} l'historique des ids de nœuds visités, ou null si absent/invalide
+ * @returns {{ ageProfile: string, style: string, history: string[] }|null}
  */
 function readSavedProgress() {
   const raw = localStorage.getItem(PROGRESS_STORAGE_KEY);
@@ -40,7 +49,9 @@ function readSavedProgress() {
 
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : null;
+    const isValid =
+      parsed && typeof parsed.ageProfile === 'string' && typeof parsed.style === 'string' && Array.isArray(parsed.history);
+    return isValid ? parsed : null;
   } catch {
     return null;
   }
@@ -53,15 +64,22 @@ function displayStory() {
   const currentNode = engine.getCurrentNode();
 
   renderNode(appContainer, currentNode, {
+    playerName: engine.getPlayerName(),
     onChoose: (nextId) => {
       engine.choose(nextId);
-      saveProgress();
+      // Une fin atteinte ne doit pas rester "reprenable" : on efface la sauvegarde
+      // plutôt que de risquer de coincer un futur joueur sur une histoire déjà terminée.
+      if (engine.isEnding()) {
+        clearProgress();
+      } else {
+        saveProgress();
+      }
       displayStory();
     },
     onRestart: () => {
       // "Recommencer" repart de zéro comme un nouveau joueur : âge, prénom et style
       // sont redemandés à chaque fois, et la progression sauvegardée est effacée.
-      engine.restart();
+      engine = null;
       clearProgress();
       init();
     },
@@ -69,18 +87,29 @@ function displayStory() {
 }
 
 /**
- * Affiche l'écran de saisie du prénom et du style narratif, puis démarre l'histoire
- * une fois validé (en reprenant la progression sauvegardée si elle existe et reste valide).
+ * Affiche l'écran de saisie du prénom et du style narratif. Une fois validé, on connaît
+ * enfin la combinaison âge x style : on sélectionne l'histoire correspondante, on crée
+ * l'engine pour cette histoire, puis on reprend la progression sauvegardée si elle
+ * correspond à la même combinaison et ne pointe pas déjà sur une fin.
+ * @param {string} ageProfile - "6-12" ou "13-18"
  */
-function showProfileFormStep() {
+function showProfileFormStep(ageProfile) {
   renderProfileForm(appContainer, {
     onSubmit: ({ name, style }) => {
-      engine.setPlayerProfile({ name, style });
+      currentAgeProfile = ageProfile;
+      currentStyle = style;
 
-      const savedHistory = readSavedProgress();
-      if (savedHistory) {
-        // restoreHistory valide elle-même les ids et repart à "start" si invalides.
-        engine.restoreHistory(savedHistory);
+      const storyNodes = selectStory(ageProfile, style);
+      engine = createNarrativeEngine(storyNodes, 'start');
+      engine.setPlayerName(name);
+
+      const saved = readSavedProgress();
+      if (saved && saved.ageProfile === ageProfile && saved.style === style) {
+        engine.restoreHistory(saved.history);
+        if (engine.isEnding()) {
+          // La sauvegarde pointait sur une histoire déjà terminée : on repart à zéro.
+          engine.restart();
+        }
       }
 
       displayStory();
@@ -89,15 +118,14 @@ function showProfileFormStep() {
 }
 
 /**
- * Point de départ de l'app : à chaque ouverture de page, on redemande systématiquement
- * le profil d'âge puis le profil joueur (prénom + style), avant d'afficher l'histoire
- * (avec reprise de la progression sauvegardée si elle existe).
+ * Point de départ de l'app : à chaque ouverture (ou "Recommencer"), on redemande
+ * systématiquement le profil d'âge puis le profil joueur (prénom + style), puis on
+ * démarre (ou reprend) l'histoire correspondant à la combinaison choisie.
  */
 function init() {
   renderAgeSelector(appContainer, {
-    onSelectAge: (profile) => {
-      engine.setAgeProfile(profile);
-      showProfileFormStep();
+    onSelectAge: (ageProfile) => {
+      showProfileFormStep(ageProfile);
     },
   });
 }

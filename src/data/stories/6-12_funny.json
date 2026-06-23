@@ -1,0 +1,88 @@
+{
+  "start": {
+    "id": "start",
+    "text": "{prenom}, ce matin, dans la forêt, c'est la panique : Hubert le hérisson a perdu ses chaussettes (oui, un hérisson en chaussettes, ne pose pas de question) et accuse tout le monde. Tonton Blaireau te propose son aide pour mener l'enquête... mais il est célèbre pour être complètement à l'ouest.",
+    "choices": [
+      { "label": "Aller interroger les écureuils bavards", "next": "squirrels" },
+      { "label": "Aller voir la taupe, qui voit tout sous terre", "next": "mole" }
+    ]
+  },
+
+  "squirrels": {
+    "id": "squirrels",
+    "text": "Les écureuils parlent tous en même temps, si vite que tu comprends seulement un mot sur trois : 'chaussette... noisette... lune... fromage ?!' Bref, ils ne sont d'aucune aide, mais l'un d'eux te montre fièrement sa collection de cailloux ronds.",
+    "choices": [
+      { "label": "Admirer poliment la collection de cailloux", "next": "rock_collection" },
+      { "label": "Foncer voir le ver de terre, témoin discret", "next": "earthworm" }
+    ]
+  },
+
+  "mole": {
+    "id": "mole",
+    "text": "La taupe, qui ne voit presque rien à la lumière du jour, fonce tête baissée dans un tas de feuilles en croyant que c'est son terrier. Une fois dépoussiérée, elle affirme avoir 'senti' les chaussettes partir vers... le lac.",
+    "choices": [
+      { "label": "Filer vers le lac immédiatement", "next": "lake" },
+      { "label": "Demander à Tonton Blaireau son avis (mauvaise idée probable)", "next": "badger_advice" }
+    ]
+  },
+
+  "rock_collection": {
+    "id": "rock_collection",
+    "text": "Sous le caillou le plus rond de la collection, surprise : une chaussette rayée dépasse ! L'écureuil l'avait piquée pour 'faire un nid plus moelleux'.",
+    "choices": [
+      { "label": "Récupérer la chaussette en rigolant", "next": "ending_squirrel_thief" },
+      { "label": "Aller quand même voir le ver de terre, pour être sûr(e)", "next": "earthworm" }
+    ]
+  },
+
+  "earthworm": {
+    "id": "earthworm",
+    "text": "Le ver de terre, très lentement, te raconte avoir vu 'quelque chose de mou et de rayé' filer vers la rivière, porté par le vent. Il a mis dix minutes à dire ça.",
+    "choices": [
+      { "label": "Courir vers la rivière avant que ça coule", "next": "ending_river_sock" },
+      { "label": "Retourner d'abord voir la collection de cailloux des écureuils", "next": "rock_collection" }
+    ]
+  },
+
+  "lake": {
+    "id": "lake",
+    "text": "Au bord du lac, une grenouille porte fièrement les deux chaussettes de Hubert comme un magnifique bonnet de bain.",
+    "choices": [
+      { "label": "Négocier l'échange contre une mouche bien grasse", "next": "ending_frog_swap" },
+      { "label": "Demander plutôt l'avis de Tonton Blaireau", "next": "badger_advice" }
+    ]
+  },
+
+  "badger_advice": {
+    "id": "badger_advice",
+    "text": "Tonton Blaireau réfléchit très fort... et conclut que les chaussettes ont sûrement été volées par des 'extraterrestres chaussettophages'. Pendant qu'il continue sa théorie, tu remarques discrètement les chaussettes... sur ses propres pattes.",
+    "choices": [
+      { "label": "Lui montrer gentiment ses pattes", "next": "ending_badger_oops" },
+      { "label": "Le laisser finir sa théorie avant de filer vers le lac", "next": "lake" }
+    ]
+  },
+
+  "ending_squirrel_thief": {
+    "id": "ending_squirrel_thief",
+    "text": "{prenom}, mystère résolu en un temps record ! Hubert récupère sa chaussette en remerciant tout le monde sauf l'écureuil, qui boude un peu en serrant son caillou préféré.",
+    "choices": []
+  },
+
+  "ending_river_sock": {
+    "id": "ending_river_sock",
+    "text": "{prenom}, tu attrapes la chaussette juste avant qu'elle ne devienne un radeau pour une famille de canards. Hubert est tellement content qu'il t'offre... l'autre chaussette, en cadeau de remerciement.",
+    "choices": []
+  },
+
+  "ending_frog_swap": {
+    "id": "ending_frog_swap",
+    "text": "{prenom}, la grenouille accepte l'échange avec un grand sourire baveux et te rend les deux chaussettes, légèrement humides mais intactes. Hubert promet de ne plus jamais les laisser traîner près de l'eau.",
+    "choices": []
+  },
+
+  "ending_badger_oops": {
+    "id": "ending_badger_oops",
+    "text": "{prenom}, Tonton Blaireau regarde ses pattes, complètement éberlué, avant d'éclater de rire le premier. Toute la forêt se moque gentiment de lui pendant une semaine, et l'affaire des chaussettes devient une légende locale.",
+    "choices": []
+  }
+}

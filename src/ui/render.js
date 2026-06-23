@@ -1,25 +1,32 @@
 // Rendu UI simple : affiche le nœud courant (texte + choix) et le bouton "Recommencer".
 // Utilise uniquement des classes Tailwind pour le style.
+// Le graphe de nœuds utilisé est déjà spécifique à la combinaison âge/style choisie
+// (voir src/data/stories.js) : il ne reste plus qu'à remplacer {prenom} via `buildText`.
+
+import { buildText } from '../engine/buildText.js';
 
 /**
  * Affiche le nœud narratif courant dans le conteneur donné.
  * @param {HTMLElement} container - élément DOM cible (ex: #app)
- * @param {Object} node - nœud courant { id, text, choices }
- * @param {Object} callbacks - { onChoose(nextId), onRestart() }
+ * @param {Object} node - nœud courant brut { id, text, choices }
+ * @param {Object} options
+ * @param {Function} options.onChoose - callback(nextId) appelé au clic sur un choix
+ * @param {Function} options.onRestart - callback() appelé au clic sur "Recommencer"
+ * @param {string} options.playerName - prénom du joueur, pour remplacer {prenom}
  */
-export function renderNode(container, node, callbacks) {
-  const { onChoose, onRestart } = callbacks;
-
+export function renderNode(container, node, { onChoose, onRestart, playerName }) {
   // Reset du conteneur avant chaque rendu
   container.innerHTML = '';
 
   const wrapper = document.createElement('div');
   wrapper.className = 'max-w-2xl mx-auto mt-12 p-6 bg-white rounded-2xl shadow-md';
 
-  // Texte de la scène
+  // Texte de la scène : le {prenom} du nœud est remplacé par le prénom du joueur
+  const finalText = buildText(node, { playerName });
+
   const textEl = document.createElement('p');
   textEl.className = 'text-lg text-slate-800 leading-relaxed mb-6';
-  textEl.textContent = node.text;
+  textEl.textContent = finalText;
   wrapper.appendChild(textEl);
 
   // Liste des choix
@@ -36,9 +43,11 @@ export function renderNode(container, node, callbacks) {
       choicesEl.appendChild(btn);
     });
   } else {
+    // Nœud de fin (choices vide) : le texte de fin est déjà inclus dans `node.text`,
+    // on ajoute juste un repère visuel.
     const endEl = document.createElement('p');
     endEl.className = 'text-sm text-slate-500 italic';
-    endEl.textContent = "C'est la fin de cette histoire.";
+    endEl.textContent = "Fin de l'histoire.";
     choicesEl.appendChild(endEl);
   }
 

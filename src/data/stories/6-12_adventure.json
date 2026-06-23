@@ -1,0 +1,88 @@
+{
+  "start": {
+    "id": "start",
+    "text": "{prenom}, le vieux capitaine du village te confie une carte au trésor toute froissée : un trésor légendaire serait caché sur l'île aux Mille Échos. Sur le port, deux bateaux attendent : le premier appartient à Mona, une navigatrice rapide et joyeuse ; le second à Bigorneau, un pêcheur prudent qui connaît tous les récifs.",
+    "choices": [
+      { "label": "Embarquer avec Mona, pour aller vite", "next": "with_mona" },
+      { "label": "Embarquer avec Bigorneau, pour avancer en sécurité", "next": "with_bigorneau" }
+    ]
+  },
+
+  "with_mona": {
+    "id": "with_mona",
+    "text": "Le bateau de Mona fend les vagues à toute vitesse ! En chemin, vous croisez un dauphin qui semble vouloir vous montrer quelque chose du bout du museau.",
+    "choices": [
+      { "label": "Suivre le dauphin curieux", "next": "dolphin_guide" },
+      { "label": "Continuer tout droit vers l'île", "next": "straight_to_island" }
+    ]
+  },
+
+  "with_bigorneau": {
+    "id": "with_bigorneau",
+    "text": "Bigorneau navigue lentement mais sûrement, évitant chaque rocher caché. Il te tend sa longue-vue : au loin, tu aperçois deux choses intéressantes, une grotte qui brille et un vieux phare abandonné.",
+    "choices": [
+      { "label": "Aller voir la grotte qui brille", "next": "shiny_cave" },
+      { "label": "Explorer le vieux phare", "next": "old_lighthouse" }
+    ]
+  },
+
+  "dolphin_guide": {
+    "id": "dolphin_guide",
+    "text": "Le dauphin vous conduit jusqu'à un petit lagon caché, où une tortue géante porte sur son dos une partie de la carte au trésor, gravée dans sa coquille !",
+    "choices": [
+      { "label": "Demander gentiment à la tortue de t'aider", "next": "ending_turtle_friend" },
+      { "label": "Remercier le dauphin et continuer tout droit vers l'île", "next": "straight_to_island" }
+    ]
+  },
+
+  "straight_to_island": {
+    "id": "straight_to_island",
+    "text": "Vous accostez directement sur l'île aux Mille Échos. La plage est calme, et un chemin de sable mène droit vers la jungle.",
+    "choices": [
+      { "label": "Foncer dans la jungle vers le trésor", "next": "ending_fast_treasure" },
+      { "label": "Faire d'abord le tour de la plage pour explorer", "next": "ending_owl_wisdom" }
+    ]
+  },
+
+  "shiny_cave": {
+    "id": "shiny_cave",
+    "text": "Dans la grotte, des cristaux scintillent partout. Au fond, un petit crabe géant garde un coffre, mais il a l'air plus joueur que méchant.",
+    "choices": [
+      { "label": "Proposer un jeu au crabe pour passer", "next": "ending_crab_game" },
+      { "label": "Aller plutôt explorer le vieux phare", "next": "old_lighthouse" }
+    ]
+  },
+
+  "old_lighthouse": {
+    "id": "old_lighthouse",
+    "text": "En haut du phare, une chouette sage t'attend avec un message : 'Le trésor n'est pas fait que d'or, jeune aventurier(ère).'",
+    "choices": [
+      { "label": "Écouter attentivement la chouette", "next": "ending_owl_wisdom" },
+      { "label": "Retourner plutôt voir la grotte qui brille", "next": "shiny_cave" }
+    ]
+  },
+
+  "ending_turtle_friend": {
+    "id": "ending_turtle_friend",
+    "text": "{prenom}, la tortue te révèle l'emplacement exact du trésor : un coffre rempli de pièces brillantes, mais surtout, tu rentres chez toi avec une nouvelle amie tortue et plein d'histoires à raconter !",
+    "choices": []
+  },
+
+  "ending_fast_treasure": {
+    "id": "ending_fast_treasure",
+    "text": "{prenom}, tu trouves le trésor en un temps record ! Mona est impressionnée par ta rapidité, et vous célébrez tous les deux sur la plage avec des fruits exotiques.",
+    "choices": []
+  },
+
+  "ending_crab_game": {
+    "id": "ending_crab_game",
+    "text": "{prenom}, tu gagnes le jeu du crabe (de très peu !) et il te laisse ouvrir le coffre plein de pièces d'or. Bigorneau est fier de toi en repartant vers le bateau.",
+    "choices": []
+  },
+
+  "ending_owl_wisdom": {
+    "id": "ending_owl_wisdom",
+    "text": "{prenom}, la chouette t'offre une plume magique en cadeau plutôt qu'un trésor en or — mais tu repars le cœur rempli de sagesse, certain(e) que c'était le plus beau des trésors.",
+    "choices": []
+  }
+}

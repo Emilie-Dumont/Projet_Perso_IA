@@ -1,0 +1,94 @@
+{
+  "start": {
+    "id": "start",
+    "text": "{prenom}, tu te réveilles en cours de chimie en réalisant que tu as présenté ton exposé... en pyjama, devant toute la classe qui filme déjà la scène. Pire : ton téléphone affiche 14 notifications du groupe classe te surnommant déjà 'Pyjama Boy/Girl'. Tu as trente secondes avant que le prof ne remarque officiellement la situation.",
+    "choices": [
+      { "label": "Improviser que c'est un 'concept de présentation'", "next": "fake_concept" },
+      { "label": "Fuir dignement vers les toilettes", "next": "flee_bathroom" }
+    ]
+  },
+
+  "fake_concept": {
+    "id": "fake_concept",
+    "text": "Contre toute attente, le prof trouve l'idée 'audacieuse' et te demande de développer ton concept devant la classe... qui filme toujours. Tu dois maintenant inventer une théorie chimique sur le pyjama en direct.",
+    "choices": [
+      { "label": "Inventer une théorie totalement absurde mais sûre de toi", "next": "absurd_theory" },
+      { "label": "Avouer que tu improvises complètement", "next": "honest_confession" }
+    ]
+  },
+
+  "flee_bathroom": {
+    "id": "flee_bathroom",
+    "text": "Tu te réfugies aux toilettes, sauf qu'elles sont fermées pour travaux. Tu te retrouves donc planqué(e) dans le local du concierge, entre un balai et une mascotte de l'école grandeur réelle qui te fixe avec ses yeux vides.",
+    "choices": [
+      { "label": "Enfiler la mascotte pour sortir incognito", "next": "wear_mascot" },
+      { "label": "Attendre la fin du cours, planqué(e) ici", "next": "wait_it_out" }
+    ]
+  },
+
+  "absurd_theory": {
+    "id": "absurd_theory",
+    "text": "Tu déclares avec un aplomb total que 'la fibre textile du pyjama stabilise les réactions exothermiques'. Personne ne comprend rien, mais tout le monde hoche la tête, impressionné par ton assurance totale.",
+    "choices": [
+      { "label": "Conclure sur une punchline mémorable", "next": "ending_legend_status" },
+      { "label": "Craquer et avouer que tu improvises tout", "next": "honest_confession" }
+    ]
+  },
+
+  "honest_confession": {
+    "id": "honest_confession",
+    "text": "Tu avoues simplement t'être trompé(e) de réveil et d'avoir foncé au lycée sans réfléchir. Toute la classe explose de rire, mais un rire bienveillant : tu deviens instantanément la personne la plus relatable de l'année.",
+    "choices": [
+      { "label": "Assumer avec le sourire jusqu'au bout", "next": "ending_relatable_hero" },
+      { "label": "Relancer en improvisant une théorie encore plus absurde", "next": "absurd_theory" }
+    ]
+  },
+
+  "wear_mascot": {
+    "id": "wear_mascot",
+    "text": "Costume de mascotte enfilé à la hâte, tu traverses le couloir en titubant. Problème : c'est précisément le jour où la mascotte doit saluer les visiteurs officiels venus inspecter l'école.",
+    "choices": [
+      { "label": "Improviser une danse de bienvenue", "next": "ending_mascot_star" },
+      { "label": "Te faufiler discrètement derrière les officiels pour t'échapper", "next": "ending_mascot_escape" }
+    ]
+  },
+
+  "wait_it_out": {
+    "id": "wait_it_out",
+    "text": "Tu patientes une heure entière dans le local à balais, croyant être discret. Le concierge te retrouve finalement, complètement hilare, et te raccompagne en classe en racontant l'histoire à tout le couloir au passage.",
+    "choices": [
+      { "label": "Entrer en classe la tête haute", "next": "ending_walk_of_fame" },
+      { "label": "Demander au concierge un costume de mascotte pour entrer déguisé(e)", "next": "wear_mascot" }
+    ]
+  },
+
+  "ending_legend_status": {
+    "id": "ending_legend_status",
+    "text": "{prenom}, ta punchline finit en story sur tous les réseaux du lycée. Le lendemain, des élèves de seconde te demandent un autographe en cours de chimie. Tu es officiellement une légende — pour de mauvaises raisons, mais une légende quand même.",
+    "choices": []
+  },
+
+  "ending_relatable_hero": {
+    "id": "ending_relatable_hero",
+    "text": "{prenom}, contre toute attente, ton honnêteté te rend plus populaire qu'avant. Le prof te donne même un point bonus 'pour le courage'. Le pyjama, lui, finit encadré dans le couloir comme souvenir du CDI.",
+    "choices": []
+  },
+
+  "ending_mascot_star": {
+    "id": "ending_mascot_star",
+    "text": "{prenom}, ta danse improvisée fait sensation devant les officiels, qui complimentent 'l'énergie incroyable' de la mascotte. Le proviseur te demande officiellement de reprendre le rôle pour toutes les fêtes de l'année.",
+    "choices": []
+  },
+
+  "ending_mascot_escape": {
+    "id": "ending_mascot_escape",
+    "text": "{prenom}, tu profites de la cohue pour te glisser hors du costume dans un couloir désert, abandonnant la mascotte près d'un radiateur. Personne ne saura jamais qui se cachait dedans, mais la légende de 'la mascotte mystère' circule encore au lycée.",
+    "choices": []
+  },
+
+  "ending_walk_of_fame": {
+    "id": "ending_walk_of_fame",
+    "text": "{prenom}, tu entres en classe sous une salve d'applaudissements ironiques mais affectueux. Le pyjama devient un running gag de l'année, et tu finis même par y trouver un certain panache.",
+    "choices": []
+  }
+}

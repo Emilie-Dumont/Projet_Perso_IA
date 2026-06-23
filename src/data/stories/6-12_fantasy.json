@@ -1,0 +1,76 @@
+{
+  "start": {
+    "id": "start",
+    "text": "{prenom}, une étoile filante traverse ta fenêtre et se transforme en une petite fée scintillante. Elle t'explique que le royaume magique de Lunaria a besoin d'un héros pour rallumer les trois lanternes d'arc-en-ciel, éteintes depuis trop longtemps. Elle te tend deux clés : une clé d'argent et une clé d'or.",
+    "choices": [
+      { "label": "Prendre la clé d'argent, qui ouvre la Forêt Chantante", "next": "silver_key" },
+      { "label": "Prendre la clé d'or, qui ouvre le Château des Nuages", "next": "gold_key" }
+    ]
+  },
+
+  "silver_key": {
+    "id": "silver_key",
+    "text": "La clé d'argent t'emmène dans la Forêt Chantante, où les arbres fredonnent une mélodie douce. Un renard à fourrure bleue te demande de l'aider à retrouver sa note de musique perdue avant de te montrer le chemin.",
+    "choices": [
+      { "label": "Chercher la note dans les fleurs lumineuses", "next": "flower_note" },
+      { "label": "Chercher la note dans le ruisseau magique", "next": "stream_note" }
+    ]
+  },
+
+  "gold_key": {
+    "id": "gold_key",
+    "text": "La clé d'or t'emmène jusqu'au Château des Nuages, qui flotte doucement dans le ciel. Un petit dragon violet, gardien du château, te propose un marché : l'aider à retrouver ses écailles perdues contre son aide.",
+    "choices": [
+      { "label": "Chercher les écailles dans la salle des miroirs", "next": "mirror_room" },
+      { "label": "Chercher les écailles dans le jardin suspendu", "next": "hanging_garden" }
+    ]
+  },
+
+  "flower_note": {
+    "id": "flower_note",
+    "text": "La note musicale s'était cachée dans le cœur d'une fleur géante, qui te la rend dans un doux nuage de pollen brillant. Le renard, ravi, t'indique où se cache la première lanterne d'arc-en-ciel.",
+    "choices": [
+      { "label": "Rallumer la première lanterne tout de suite", "next": "ending_singing_forest" },
+      { "label": "Garder la note précieusement et chercher le ruisseau magique aussi", "next": "stream_note" }
+    ]
+  },
+
+  "stream_note": {
+    "id": "stream_note",
+    "text": "La note flottait sur l'eau, portée par un petit poisson arc-en-ciel qui te la dépose gentiment dans la main. Le renard chante enfin sa mélodie complète, et la forêt entière s'illumine doucement.",
+    "choices": [
+      { "label": "Rallumer la première lanterne", "next": "ending_singing_forest" },
+      { "label": "Filer ensuite vers le Château des Nuages", "next": "gold_key" }
+    ]
+  },
+
+  "mirror_room": {
+    "id": "mirror_room",
+    "text": "Dans la salle des miroirs, chaque reflet montre une écaille différente. Tu choisis le bon miroir du premier coup, et les écailles apparaissent en scintillant dans tes mains.",
+    "choices": [
+      { "label": "Rallumer la deuxième lanterne tout de suite", "next": "ending_cloud_castle" },
+      { "label": "Aller aussi chercher dans le jardin suspendu, par curiosité", "next": "hanging_garden" }
+    ]
+  },
+
+  "hanging_garden": {
+    "id": "hanging_garden",
+    "text": "Dans le jardin suspendu, les écailles s'étaient transformées en pétales violets parmi les fleurs flottantes. Tu les rassembles une à une avec attention.",
+    "choices": [
+      { "label": "Rallumer la deuxième lanterne", "next": "ending_cloud_castle" },
+      { "label": "Filer ensuite vers la Forêt Chantante", "next": "silver_key" }
+    ]
+  },
+
+  "ending_singing_forest": {
+    "id": "ending_singing_forest",
+    "text": "{prenom}, la première lanterne d'arc-en-ciel se rallume avec un grand éclat doré, et toute la Forêt Chantante se met à chanter de joie. La fée te remercie : tu es désormais l'ami(e) officiel(le) de Lunaria.",
+    "choices": []
+  },
+
+  "ending_cloud_castle": {
+    "id": "ending_cloud_castle",
+    "text": "{prenom}, grâce aux écailles retrouvées, le petit dragon retrouve toute sa magie et t'aide à rallumer la deuxième lanterne dans une explosion de couleurs. Le Château des Nuages flotte désormais un peu plus haut, fier et brillant.",
+    "choices": []
+  }
+}

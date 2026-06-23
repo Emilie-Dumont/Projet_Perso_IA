@@ -1,0 +1,94 @@
+{
+  "start": {
+    "id": "start",
+    "text": "{prenom}, ton avion de tourisme s'est écrasé en pleine forêt tropicale, loin de toute route. La radio est morte, la nuit tombe vite sous ces latitudes, et tu n'as que ton sac de secours. Avant la nuit, deux options s'imposent : bâtir un abri solide, ou repérer les environs pendant qu'il fait encore jour.",
+    "choices": [
+      { "label": "Construire un abri avant la nuit", "next": "build_shelter" },
+      { "label": "Explorer les environs pendant qu'il fait jour", "next": "scout_area" }
+    ]
+  },
+
+  "build_shelter": {
+    "id": "build_shelter",
+    "text": "Tu montes un abri rudimentaire avec des branches et une bâche de secours. La nuit se passe sans incident majeur, mais au matin, tu entends au loin un bruit d'eau courante : peut-être une rivière à suivre vers la civilisation.",
+    "choices": [
+      { "label": "Suivre le bruit de l'eau dès l'aube", "next": "follow_river" },
+      { "label": "Grimper d'abord sur une hauteur pour observer la zone", "next": "climb_high" }
+    ]
+  },
+
+  "scout_area": {
+    "id": "scout_area",
+    "text": "Tu repères une vallée encaissée et une ligne de crêtes au loin avant que la lumière ne baisse. La nuit te surprend à découvert : tu dois improviser un abri minimal entre deux rochers, sans grand confort, mais tu connais maintenant le terrain.",
+    "choices": [
+      { "label": "Descendre vers la vallée, plus accessible", "next": "valley_path" },
+      { "label": "Viser les crêtes, plus risquées mais plus rapides", "next": "ridge_path" }
+    ]
+  },
+
+  "follow_river": {
+    "id": "follow_river",
+    "text": "La rivière te guide à travers une jungle dense. À mi-parcours, le terrain se complique : un éboulement bloque la rive, et tu dois choisir entre traverser le courant à gué ou contourner par la forêt épaisse.",
+    "choices": [
+      { "label": "Traverser le courant, risqué mais direct", "next": "ending_river_crossing" },
+      { "label": "Contourner par la forêt, plus long mais plus sûr", "next": "ending_forest_detour" }
+    ]
+  },
+
+  "climb_high": {
+    "id": "climb_high",
+    "text": "Du sommet d'un arbre massif, tu repères une colonne de fumée à l'horizon : un campement, ou peut-être un feu de brousse. C'est ta meilleure piste, mais y aller demande de traverser un terrain incertain. Tu remarques aussi, plus près, le bruit de la rivière que tu avais quittée.",
+    "choices": [
+      { "label": "Foncer droit vers la fumée", "next": "ending_smoke_signal" },
+      { "label": "Redescendre plutôt vers la rivière, plus sûre", "next": "follow_river" }
+    ]
+  },
+
+  "valley_path": {
+    "id": "valley_path",
+    "text": "La vallée est humide et difficile, mais tu finis par déboucher sur un sentier visiblement utilisé par des humains : des traces de pas récentes, fraîches dans la boue. Un peu plus loin, tu aperçois aussi une ligne de crêtes qui pourrait offrir un meilleur point de vue.",
+    "choices": [
+      { "label": "Suivre les traces de pas dans la boue", "next": "ending_human_tracks" },
+      { "label": "Grimper plutôt vers les crêtes", "next": "ridge_path" }
+    ]
+  },
+
+  "ridge_path": {
+    "id": "ridge_path",
+    "text": "Le chemin des crêtes est exigeant, le souffle court, mais tu progresses vite. En haut, tu captes enfin un signal radio faible, juste assez pour envoyer un appel de détresse avant que la batterie ne lâche. Tu repères aussi, au loin, une fine colonne de fumée.",
+    "choices": [
+      { "label": "Envoyer l'appel de détresse immédiatement", "next": "ending_distress_call" },
+      { "label": "Tenter plutôt de rejoindre la fumée repérée", "next": "climb_high" }
+    ]
+  },
+
+  "ending_river_crossing": {
+    "id": "ending_river_crossing",
+    "text": "{prenom}, la traversée est éprouvante, le courant te déstabilise une fois, mais tu t'en sors avec quelques égratignures. De l'autre côté, un sentier de pêcheurs te mène vers un petit village en à peine deux heures de marche.",
+    "choices": []
+  },
+
+  "ending_forest_detour": {
+    "id": "ending_forest_detour",
+    "text": "{prenom}, le détour te coûte une journée entière de marche, fatigant mais sans danger réel. Tu rejoins finalement une piste forestière utilisée par des bûcherons, qui te ramènent vers la civilisation.",
+    "choices": []
+  },
+
+  "ending_smoke_signal": {
+    "id": "ending_smoke_signal",
+    "text": "{prenom}, la fumée venait d'un campement de chercheurs en mission scientifique dans la région. Stupéfaits de te voir arriver seul(e) de la jungle, ils te recueillent et contactent les secours par satellite.",
+    "choices": []
+  },
+
+  "ending_human_tracks": {
+    "id": "ending_human_tracks",
+    "text": "{prenom}, les traces te mènent jusqu'à un petit hameau isolé. Les habitants, surpris mais accueillants, t'offrent à manger et préviennent les autorités de ton sauvetage dès le lendemain.",
+    "choices": []
+  },
+
+  "ending_distress_call": {
+    "id": "ending_distress_call",
+    "text": "{prenom}, ton appel passe de justesse avant que la radio ne s'éteigne pour de bon. Quelques heures plus tard, un hélicoptère de secours repère ta position grâce aux dernières coordonnées transmises.",
+    "choices": []
+  }
+}

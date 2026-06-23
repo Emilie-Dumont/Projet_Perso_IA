@@ -4,10 +4,17 @@
       "Bash(mkdir -p \"/c/Users/emili/Desktop/Projet_Perso_IA/.claude/agents\")",
       "Bash(cd \"/c/Users/emili/Desktop/Projet_Perso_IA\" && ls node_modules 2>/dev/null | head -1 || echo \"NO_NODE_MODULES\")",
       "Read(//c/c/Users/emili/Desktop/Projet_Perso_IA/**)",
-      "Bash(timeout 8 npm run dev)"
+      "Bash(timeout 8 npm run dev)",
+      "Bash(node -e ' *)",
+      "Bash(cd \"/c/Users/emili/Desktop/Projet_Perso_IA\" && rm src/data/nodes.mock.json)",
+      "Bash(command -v pandoc)",
+      "Bash(command -v wkhtmltopdf)",
+      "Bash(where chrome.exe)",
+      "Bash(where msedge.exe)"
     ],
     "additionalDirectories": [
-      "C:\\Users\\emili\\Desktop\\Projet_Perso_IA\\.claude"
+      "C:\\Users\\emili\\Desktop\\Projet_Perso_IA\\.claude",
+      "c:\\c\\Users\\emili\\Desktop\\Projet_Perso_IA\\src\\data"
     ]
   }
 }
