@@ -4,6 +4,7 @@
 // (voir src/data/stories.js) : il ne reste plus qu'à remplacer {prenom} via `buildText`.
 
 import { buildText } from '../engine/buildText.js';
+import { speak, stopSpeaking } from './speech.js';
 import adventureIllustration from '../assets/adventure.svg';
 import funnyIllustration from '../assets/funny.svg';
 import fantasyIllustration from '../assets/fantasy.svg';
@@ -28,6 +29,9 @@ const FALLBACK_STYLE = 'adventure';
  * @param {string} [options.style] - style narratif courant ("adventure" | "funny" | "fantasy")
  */
 export function renderNode(container, node, { onChoose, onRestart, playerName, style }) {
+  // On change de nœud (y compris via "Recommencer") : on coupe toute lecture vocale en cours.
+  stopSpeaking();
+
   // Reset du conteneur avant chaque rendu
   container.innerHTML = '';
 
@@ -51,6 +55,14 @@ export function renderNode(container, node, { onChoose, onRestart, playerName, s
   textEl.className = 'text-lg text-slate-800 leading-relaxed mb-6';
   textEl.textContent = finalText;
   wrapper.appendChild(textEl);
+
+  // Bouton d'écoute du texte de la scène via la synthèse vocale du navigateur
+  const speakBtn = document.createElement('button');
+  speakBtn.className =
+    'mb-6 px-4 py-2 rounded-xl bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-medium transition-colors border border-indigo-200';
+  speakBtn.textContent = "🔊 Écouter l'histoire";
+  speakBtn.addEventListener('click', () => speak(finalText));
+  wrapper.appendChild(speakBtn);
 
   // Liste des choix
   const choicesEl = document.createElement('div');
