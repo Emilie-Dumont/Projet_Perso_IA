@@ -11,7 +11,16 @@
       "Bash(command -v wkhtmltopdf)",
       "Bash(where chrome.exe)",
       "Bash(where msedge.exe)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} for /src/assets/fantasy.svg\\\\n\" http://localhost:5173/src/assets/fantasy.svg)",
+      "Bash(curl -s http://localhost:5173/src/assets/fantasy.svg)",
+      "Bash(curl -s http://localhost:5173/)",
+      "Bash(netstat -ano)",
+      "Bash(ps -W)",
+      "Bash(curl -s http://localhost:5173/src/ui/render.js)",
+      "Bash(curl -s \"http://localhost:5173/src/assets/fantasy.svg?import\")",
+      "Bash(taskkill //PID 39488 //F)",
+      "Bash(taskkill //PID 4233792 //F)"
     ],
     "additionalDirectories": [
       "C:\\Users\\emili\\Desktop\\Projet_Perso_IA\\.claude",
