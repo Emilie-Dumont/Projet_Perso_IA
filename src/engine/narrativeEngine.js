@@ -1,23 +1,33 @@
 // Moteur narratif simple : charge des nœuds et gère l'historique de navigation.
 // Un "nœud" = { id, text: { "6-12": "...", "13-18": "..." }, choices: [{ label, next }] }
 
+import storyStyles from '../data/storyStyles.mock.json';
+
+const PRENOM_TOKEN = '{prenom}';
+const DEFAULT_PLAYER_NAME = 'Aventurier';
+
 /**
  * Crée une instance du moteur narratif à partir d'un objet de nœuds.
  * @param {Object} nodes - dictionnaire { id: noeud }
  * @param {string} startId - id du nœud de départ
  * @param {string} ageProfile - profil d'âge initial ("6-12" ou "13-18")
- * @returns {Object} API du moteur (getCurrentNode, choose, restart, restoreHistory, getHistory, setAgeProfile, getAgeProfile)
+ * @returns {Object} API du moteur (getCurrentNode, choose, restart, restoreHistory, getHistory,
+ *   setAgeProfile, getAgeProfile, setPlayerProfile, getPlayerProfile)
  */
 export function createNarrativeEngine(nodes, startId = 'start', ageProfile = '6-12') {
   let history = [startId];
   let currentAgeProfile = ageProfile;
+  // Profil joueur : prénom affiché dans les nœuds + style narratif (touche de ton légère).
+  let playerName = DEFAULT_PLAYER_NAME;
+  let storyStyle = null;
 
   function getCurrentNodeId() {
     return history[history.length - 1];
   }
 
   /**
-   * Retourne le nœud courant avec son texte déjà adapté au profil d'âge choisi.
+   * Retourne le nœud courant avec son texte déjà adapté au profil d'âge,
+   * personnalisé avec le prénom du joueur et légèrement teinté par le style choisi.
    * Le reste de l'app (UI) n'a donc pas besoin de connaître la forme brute de `text`.
    */
   function getCurrentNode() {
@@ -26,9 +36,17 @@ export function createNarrativeEngine(nodes, startId = 'start', ageProfile = '6-
     if (!node) {
       throw new Error(`Nœud narratif introuvable pour l'id "${id}"`);
     }
+
+    const ageText = resolveTextForAge(node.text, currentAgeProfile);
+    // Le style s'applique avant la substitution du prénom : sinon, quand {prenom} est
+    // en tout début de phrase, la mise en minuscule du premier caractère (pour enchaîner
+    // l'opener) retombe sur la première lettre du prénom au lieu de celle du texte.
+    const styledText = applyStoryStyle(ageText, storyStyle);
+    const personalizedText = applyPlayerName(styledText, playerName);
+
     return {
       ...node,
-      text: resolveTextForAge(node.text, currentAgeProfile),
+      text: personalizedText,
     };
   }
 
@@ -42,6 +60,23 @@ export function createNarrativeEngine(nodes, startId = 'start', ageProfile = '6-
 
   function getAgeProfile() {
     return currentAgeProfile;
+  }
+
+  /**
+   * Définit le profil joueur (prénom + style narratif).
+   * @param {Object} profile - { name?: string, style?: string }
+   */
+  function setPlayerProfile({ name, style } = {}) {
+    if (name && name.trim()) {
+      playerName = name.trim();
+    }
+    if (style) {
+      storyStyle = style;
+    }
+  }
+
+  function getPlayerProfile() {
+    return { name: playerName, style: storyStyle };
   }
 
   /**
@@ -103,6 +138,8 @@ export function createNarrativeEngine(nodes, startId = 'start', ageProfile = '6-
     isEnding,
     setAgeProfile,
     getAgeProfile,
+    setPlayerProfile,
+    getPlayerProfile,
   };
 }
 
@@ -118,4 +155,35 @@ function resolveTextForAge(text, ageProfile) {
     return text;
   }
   return text[ageProfile] || text['6-12'] || Object.values(text)[0] || '';
+}
+
+/**
+ * Remplace toutes les occurrences du token {prenom} par le prénom du joueur.
+ * @param {string} text
+ * @param {string} name
+ * @returns {string}
+ */
+function applyPlayerName(text, name) {
+  return text.split(PRENOM_TOKEN).join(name);
+}
+
+/**
+ * Ajoute une légère touche stylistique au texte (formule d'ouverture + connecteur de fin),
+ * sans réécrire le contenu narratif. Si aucun style n'est défini ou inconnu, le texte
+ * est retourné inchangé.
+ * @param {string} text
+ * @param {string|null} style - "adventure" | "funny" | "fantasy" | null
+ * @returns {string}
+ */
+function applyStoryStyle(text, style) {
+  const touch = style && storyStyles[style];
+  if (!touch) {
+    return text;
+  }
+
+  const opener = touch.opener || '';
+  const connector = touch.connector || '';
+  const openedText = opener + text.charAt(0).toLowerCase() + text.slice(1);
+
+  return `${openedText}${connector}`;
 }
