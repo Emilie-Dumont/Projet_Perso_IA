@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"/c/Users/emili/Desktop/Projet_Perso_IA\")",
+      "Read(//c/Users/emili/Desktop/Projet_Perso_IA/**)"
+    ]
+  }
+}

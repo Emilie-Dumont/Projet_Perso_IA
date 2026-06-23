@@ -1,0 +1,59 @@
+{
+  "start": {
+    "id": "start",
+    "text": {
+      "6-12": "Tu te réveilles dans une jolie forêt pleine de petits bruits rigolos. Devant toi, deux chemins t'attendent.",
+      "13-18": "Tu te réveilles dans une forêt mystérieuse. Les arbres semblent chuchoter autour de toi. Devant toi, deux chemins s'ouvrent, chacun porteur d'un mystère différent."
+    },
+    "choices": [
+      { "label": "Suivre le chemin de gauche, éclairé par des lucioles", "next": "forest_left" },
+      { "label": "Suivre le chemin de droite, où l'on entend une rivière", "next": "forest_right" }
+    ]
+  },
+  "forest_left": {
+    "id": "forest_left",
+    "text": {
+      "6-12": "Le chemin te mène à une clairière où vit une petite créature lumineuse et gentille. Elle te regarde avec curiosité et te tend une carte.",
+      "13-18": "Le chemin te mène à une clairière où vit une créature lumineuse, à la fois étrange et bienveillante. Elle t'observe avec attention et te tend une carte usée."
+    },
+    "choices": [
+      { "label": "Prendre la carte et la remercier", "next": "ending_friend" },
+      { "label": "Repartir prudemment sans toucher à rien", "next": "ending_cautious" }
+    ]
+  },
+  "forest_right": {
+    "id": "forest_right",
+    "text": {
+      "6-12": "Tu arrives au bord d'une jolie rivière qui brille. Un vieux pont en bois la traverse, mais il a l'air un peu fragile.",
+      "13-18": "Tu arrives au bord d'une rivière scintillante. Un vieux pont de bois la traverse, ses planches usées laissant deviner une certaine fragilité."
+    },
+    "choices": [
+      { "label": "Traverser le pont avec précaution", "next": "ending_brave" },
+      { "label": "Chercher un autre passage le long de la rive", "next": "ending_cautious" }
+    ]
+  },
+  "ending_friend": {
+    "id": "ending_friend",
+    "text": {
+      "6-12": "Grâce à la carte, tu retrouves facilement le chemin de la maison. Tu t'es fait un nouvel ami dans la forêt. Fin de l'histoire.",
+      "13-18": "Grâce à la carte, tu retrouves ton chemin sans difficulté. Cette rencontre t'a appris que la confiance, parfois, ouvre des portes inattendues. Fin de l'histoire."
+    },
+    "choices": []
+  },
+  "ending_brave": {
+    "id": "ending_brave",
+    "text": {
+      "6-12": "Le pont a tenu bon ! De l'autre côté, tu découvres un magnifique village caché. Bravo, tu as été très courageux !",
+      "13-18": "Le pont a tenu, malgré les craquements. De l'autre côté, un village caché t'attend, comme une récompense pour avoir assumé le risque. Fin de l'histoire."
+    },
+    "choices": []
+  },
+  "ending_cautious": {
+    "id": "ending_cautious",
+    "text": {
+      "6-12": "Tu as choisi d'être prudent et tu as trouvé un autre chemin tout sûr. Tu rentres chez toi en sécurité, avec une belle histoire à raconter.",
+      "13-18": "Tu as privilégié la prudence et trouvé une autre voie, plus sûre. Tu rentres chez toi indemne, avec la certitude que chaque choix compte. Fin de l'histoire."
+    },
+    "choices": []
+  }
+}

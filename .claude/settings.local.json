@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/c/Users/emili/Desktop/Projet_Perso_IA/.claude/agents\")",
+      "Bash(cd \"/c/Users/emili/Desktop/Projet_Perso_IA\" && ls node_modules 2>/dev/null | head -1 || echo \"NO_NODE_MODULES\")",
+      "Read(//c/c/Users/emili/Desktop/Projet_Perso_IA/**)",
+      "Bash(timeout 8 npm run dev)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\emili\\Desktop\\Projet_Perso_IA\\.claude"
+    ]
+  }
+}
